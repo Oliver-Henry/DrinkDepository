@@ -2,11 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.olive.drinkdepository.DrinkListFragment">
+    tools:context="com.example.olive.drinkdepository.drink_list.DrinkListFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rVDrinkList"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

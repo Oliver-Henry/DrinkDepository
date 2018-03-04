@@ -5,11 +5,8 @@ package com.example.olive.drinkdepository.data.network.service;
  */
 
 public class ApiList {
-    public static final String BASE_URL = "https://www.thecocktaildb.com/api/json/v1/";
-    public static final String API_KEY = "1";
-
-
-
-
+    public static final String BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/";
+//    public static final String API_KEY = "1";
+    public static final String MARGARITA_TEST = "search.php?s=margarita";
 
 }

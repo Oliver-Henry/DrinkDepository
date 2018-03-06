@@ -95,4 +95,23 @@ public class DrinkListPresenterImpl<V extends IDrinkListMvpView> extends BasePre
                     }
                 }));
     }
+
+    @Override
+    public void loadDrinksByIngredientList(String i) {
+        getCompositeDisposable().add(getDataManager().getDrinksByIngredientList(i)
+        .subscribeOn(getSchedulerProvider().io())
+        .observeOn(getSchedulerProvider().ui())
+        .subscribe(new Consumer<DrinksModel>() {
+                       @Override
+                       public void accept(DrinksModel drinksModel) throws Exception {
+                                getMvpView().onFetchDataSuccess(drinksModel);
+                       }
+                   },
+                new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getMvpView().onFetchDataError(throwable.getMessage());
+                    }
+                }));
+    }
 }

@@ -1,7 +1,12 @@
 package com.example.olive.drinkdepository;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,11 +20,13 @@ import android.widget.SearchView;
 
 import com.example.olive.drinkdepository.drink_details.DrinkDetailsFragment;
 import com.example.olive.drinkdepository.drink_list.DrinkListFragment;
+import com.example.olive.drinkdepository.ingredients_list.IngredientListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static FragmentManager fragmentManager;
-    SearchView searchView;
+    private SearchView searchView;
+//    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         searchView= (SearchView) findViewById(R.id.SearchView);
         searchView.setVisibility(View.INVISIBLE);
+//        mViewPager = (ViewPager) findViewById(R.id.vPager);
+//        mViewPager.setAdapter(new TestPagerAdapter(getSupportFragmentManager()));
 
         fragmentManager = getSupportFragmentManager();
         if(savedInstanceState == null){
@@ -36,15 +45,6 @@ public class MainActivity extends AppCompatActivity
                     .add(R.id.fragment_container, new HomeFragment())
                     .commit();
         }
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -73,20 +72,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -104,6 +89,7 @@ public class MainActivity extends AppCompatActivity
                     .commit();
         } else if (id == R.id.nav_search) {
             searchView.setVisibility(View.VISIBLE);
+            //recyclerView.clear
         } else if (id == R.id.nav_ordinary_drinks) {
             searchView.setVisibility(View.INVISIBLE);
             page = "O";
@@ -144,6 +130,11 @@ public class MainActivity extends AppCompatActivity
                     .commit();
 
         } else if (id == R.id.nav_search_drk_ingr) {
+            searchView.setVisibility(View.INVISIBLE);
+            IngredientListFragment ingredientListFragment = new IngredientListFragment();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, ingredientListFragment)
+                    .commit();
 
         } else if (id == R.id.nav_rndm_drink) {
 
@@ -170,4 +161,35 @@ public class MainActivity extends AppCompatActivity
                 .addToBackStack(null)
                 .commit();
     }
+
+    public static void displayDrinksByIngredient(String name, int position){
+        String page = "I";
+        DrinkListFragment drinkListFragment = new DrinkListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("page", page);
+        bundle.putString("name", name);
+        bundle.putInt("position", position);
+        drinkListFragment.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, drinkListFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+//    private class TestPagerAdapter extends FragmentStatePagerAdapter {
+//        public TestPagerAdapter(FragmentManager supportFragmentManager) {
+//            super(supportFragmentManager);
+//        }
+//
+//        @Override
+//        public Fragment getItem(int position) {
+//            HomeFragment homeFragment = new HomeFragment();
+//            return homeFragment;
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            return 1;
+//        }
+//    }
 }

@@ -30,4 +30,13 @@ public interface IRequestInterface {
     Observable<DrinksModel> getDrinkDetails(@Query("i") int i);
     //Observable<DrinksModel> getDrinkDetails(@Path("id") int id);
 
+    @GET(ApiList.INGREDIENTS_LIST)
+    Observable<DrinksModel> getIngredients();
+
+    @GET(ApiList.SEARCH_BY_INGREDIENT)
+    Observable<DrinksModel> getDrinksByIngredient(@Query("i") String i);
+
+    @GET(ApiList.RANDOM_DRINK)
+    Observable<Drink> getRandomDrink();
+
 }

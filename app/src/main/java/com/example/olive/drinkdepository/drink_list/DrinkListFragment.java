@@ -72,6 +72,8 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
                              else if(page == "C"){drinkListFragmentDrinkListPresenter.loadCocktailDrinksList();}
                              else if(page == "H"){drinkListFragmentDrinkListPresenter.loadHomemadeDrinksList();}
                              else if(page == "P"){drinkListFragmentDrinkListPresenter.loadPartyDrinksList();}
+                             else if(page == "I"){String i = getArguments().getString("name");
+                                 drinkListFragmentDrinkListPresenter.loadDrinksByIngredientList(i);}
                         }
                         else{
                             Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_SHORT).show();

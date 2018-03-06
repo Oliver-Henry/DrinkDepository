@@ -11,4 +11,5 @@ public interface IDrinkListMvpPresenter<V extends IDrinkListMvpView> extends Mvp
     void loadCocktailDrinksList();
     void loadHomemadeDrinksList();
     void loadPartyDrinksList();
+    void loadDrinksByIngredientList(String i);
 }

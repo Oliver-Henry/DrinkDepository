@@ -1,9 +1,11 @@
 package com.example.olive.drinkdepository.data.network.service;
 
+import com.example.olive.drinkdepository.data.network.model.Drink;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -12,7 +14,20 @@ import retrofit2.http.Query;
 
 public interface IRequestInterface {
 
-    @GET(ApiList.MARGARITA_TEST)
-    //Observable<DrinksModel> getDrinks(@Query("api_key") String apiKey);
+    @GET(ApiList.ORDINARY_DRINKS)
     Observable<DrinksModel> getDrinks();
+
+    @GET(ApiList.COCKTAILS)
+    Observable<DrinksModel> getCocktailDrinks();
+
+    @GET(ApiList.HOMEMADE_LIQUEURS)
+    Observable<DrinksModel> getHomemadeDrinks();
+
+    @GET(ApiList.PUNCH_PARTY_DRINKS)
+    Observable<DrinksModel> getPartyDrinks();
+
+    @GET(ApiList.DRINK_DETAILS)
+    Observable<DrinksModel> getDrinkDetails(@Query("i") int i);
+    //Observable<DrinksModel> getDrinkDetails(@Path("id") int id);
+
 }

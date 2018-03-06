@@ -20,4 +20,13 @@ public class AppDataManager implements IDataManager {
     public Observable<DrinksModel> getDrinksList() {
         return iApiHelper.getDrinksList();
     }
+
+    @Override
+    public Observable<DrinksModel> getCocktailDrinksList() {return iApiHelper.getCocktailDrinksList();}
+
+    @Override
+    public Observable<DrinksModel> getHomemadeDrinksList() {return iApiHelper.getHomemadeDrinksList();}
+
+    @Override
+    public Observable<DrinksModel> getPartyDrinksList() {return iApiHelper.getPartyDrinksList();}
 }

@@ -3,33 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search" />
     <group android:checkableBehavior="single">
+        <item android:title="Categories" />
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@android:drawable/ic_menu_delete"
-            android:title="Home" />
-        <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_ordinary_drinks"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Ordinary Drinks" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_cocktails"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Cocktails" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_homemade_liqueurs"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Homemade Liqueurs" />
+        <item
+            android:id="@+id/nav_punch_party_drinks"
+            android:icon="@android:drawable/btn_star_big_on"
+            android:title="Punch / Party Drinks" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="-----------------------------------------------------">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_search_drk_ingr"
+                android:icon="@android:drawable/ic_search_category_default"
+                android:title="Search Drink By Ingredient" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_rndm_drink"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Random Drink" />
+            <item
+                android:id="@+id/nav_map"
                 android:icon="@android:drawable/ic_dialog_map"
                 android:title="Map" />
         </menu>

@@ -10,4 +10,8 @@ import io.reactivex.Observable;
 
 public interface IApiHelper {
     Observable<DrinksModel> getDrinksList();
+    Observable<DrinksModel> getCocktailDrinksList();
+    Observable<DrinksModel> getHomemadeDrinksList();
+    Observable<DrinksModel> getPartyDrinksList();
+
 }

@@ -42,6 +42,8 @@ dependencies {
 
     implementation 'com.github.pwittchen:reactivenetwork-rx2:0.12.3'
 
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
     //Networking
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'

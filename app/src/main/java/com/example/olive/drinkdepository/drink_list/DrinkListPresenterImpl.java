@@ -38,4 +38,61 @@ public class DrinkListPresenterImpl<V extends IDrinkListMvpView> extends BasePre
                 }
         ));
     }
+
+    @Override
+    public void loadCocktailDrinksList() {
+        getCompositeDisposable().add(getDataManager().getCocktailDrinksList()
+        .subscribeOn(getSchedulerProvider().io())
+        .observeOn(getSchedulerProvider().ui())
+        .subscribe(new Consumer<DrinksModel>() {
+                       @Override
+                       public void accept(DrinksModel drinksModel) throws Exception {
+                           getMvpView().onFetchDataSuccess(drinksModel);
+                       }
+                   },
+                new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getMvpView().onFetchDataError(throwable.getMessage());
+                    }
+                }));
+    }
+
+    @Override
+    public void loadHomemadeDrinksList() {
+        getCompositeDisposable().add(getDataManager().getHomemadeDrinksList()
+        .subscribeOn(getSchedulerProvider().io())
+        .observeOn(getSchedulerProvider().ui())
+        .subscribe(new Consumer<DrinksModel>() {
+                       @Override
+                       public void accept(DrinksModel drinksModel) throws Exception {
+                           getMvpView().onFetchDataSuccess(drinksModel);
+                       }
+                   },
+                new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getMvpView().onFetchDataError(throwable.getMessage());
+                    }
+                }));
+    }
+
+    @Override
+    public void loadPartyDrinksList() {
+        getCompositeDisposable().add(getDataManager().getPartyDrinksList()
+        .subscribeOn(getSchedulerProvider().io())
+        .observeOn(getSchedulerProvider().ui())
+        .subscribe(new Consumer<DrinksModel>() {
+                       @Override
+                       public void accept(DrinksModel drinksModel) throws Exception {
+                           getMvpView().onFetchDataSuccess(drinksModel);
+                       }
+                   },
+                new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getMvpView().onFetchDataError(throwable.getMessage());
+                    }
+                }));
+    }
 }

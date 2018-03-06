@@ -46,6 +46,7 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
         recyclerView= view.findViewById(R.id.rVDrinkList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //refreshLayout= view.findViewById(R.id."id");
+        setRetainInstance(true);
         callService();
         drinkListFragmentDrinkListPresenter = new DrinkListPresenterImpl<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
         drinkListFragmentDrinkListPresenter.onAttach(this);
@@ -66,7 +67,11 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
                     @Override
                     public void accept(Boolean isConnectedToInternet) throws Exception {
                         if(isConnectedToInternet){
-                            drinkListFragmentDrinkListPresenter.loadDrinksList();
+                             String page = getArguments().getString("page");
+                             if(page == "O"){drinkListFragmentDrinkListPresenter.loadDrinksList();}
+                             else if(page == "C"){drinkListFragmentDrinkListPresenter.loadCocktailDrinksList();}
+                             else if(page == "H"){drinkListFragmentDrinkListPresenter.loadHomemadeDrinksList();}
+                             else if(page == "P"){drinkListFragmentDrinkListPresenter.loadPartyDrinksList();}
                         }
                         else{
                             Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_SHORT).show();
@@ -82,9 +87,8 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
 
     @Override
     public void onFetchDataSuccess(DrinksModel drinksModel) {
-        Toast.makeText(getActivity(), "hello", Toast.LENGTH_SHORT).show();
-        recyclerView.setAdapter(new DrinkListAdapter(getActivity().getApplicationContext(), drinksModel.getDrinks(), R.layout.row_layout));
-    }
+            recyclerView.setAdapter(new DrinkListAdapter(getActivity().getApplicationContext(), drinksModel.getDrinks(), R.layout.row_layout));
+        }
 
     @Override
     public void onFetchDataError(String error) {

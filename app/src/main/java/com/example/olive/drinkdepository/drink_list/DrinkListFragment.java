@@ -59,6 +59,8 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
         return inflater.inflate(R.layout.fragment_drink_list, container, false);
     }
 
+
+
     public void callService(){
         ReactiveNetwork.observeInternetConnectivity()
                 .subscribeOn(Schedulers.io())
@@ -68,12 +70,9 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
                     public void accept(Boolean isConnectedToInternet) throws Exception {
                         if(isConnectedToInternet){
                              String page = getArguments().getString("page");
-                             if(page == "O"){drinkListFragmentDrinkListPresenter.loadDrinksList();}
-                             else if(page == "C"){drinkListFragmentDrinkListPresenter.loadCocktailDrinksList();}
-                             else if(page == "H"){drinkListFragmentDrinkListPresenter.loadHomemadeDrinksList();}
-                             else if(page == "P"){drinkListFragmentDrinkListPresenter.loadPartyDrinksList();}
-                             else if(page == "I"){String i = getArguments().getString("name");
-                                 drinkListFragmentDrinkListPresenter.loadDrinksByIngredientList(i);}
+                            if(page == "I"){String i = getArguments().getString("name");
+                                drinkListFragmentDrinkListPresenter.loadDrinksByIngredientList(i);}
+                             else {drinkListFragmentDrinkListPresenter.loadDrinksList(page);}
                         }
                         else{
                             Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_SHORT).show();

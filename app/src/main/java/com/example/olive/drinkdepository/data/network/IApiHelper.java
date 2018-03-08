@@ -9,12 +9,11 @@ import io.reactivex.Observable;
  */
 
 public interface IApiHelper {
-    Observable<DrinksModel> getDrinksList();
-    Observable<DrinksModel> getCocktailDrinksList();
-    Observable<DrinksModel> getHomemadeDrinksList();
-    Observable<DrinksModel> getPartyDrinksList();
+    Observable<DrinksModel> getDrinksList(String c);
     Observable<DrinksModel> getIngredientsList();
     Observable<DrinksModel> getDrinksByIngredientList(String i);
     Observable<DrinksModel> getDrinkDetailsPage(int i);
+    Observable<DrinksModel> getSearchedDrinkList(String s);
+    Observable<DrinksModel> getRandomDrinkDetails();
 
 }

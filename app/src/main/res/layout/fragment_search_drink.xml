@@ -1,0 +1,20 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.olive.drinkdepository.search_drink.SearchDrinkFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <SearchView
+        android:id="@+id/sVDrinkSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rVDrinkSearch"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical"
+        android:layout_height="470dp"
+        android:layout_marginTop="50dp" />
+</FrameLayout>

@@ -17,18 +17,9 @@ public class AppDataManager implements IDataManager {
 
 
     @Override
-    public Observable<DrinksModel> getDrinksList() {
-        return iApiHelper.getDrinksList();
+    public Observable<DrinksModel> getDrinksList(String c) {
+        return iApiHelper.getDrinksList(c);
     }
-
-    @Override
-    public Observable<DrinksModel> getCocktailDrinksList() {return iApiHelper.getCocktailDrinksList();}
-
-    @Override
-    public Observable<DrinksModel> getHomemadeDrinksList() {return iApiHelper.getHomemadeDrinksList();}
-
-    @Override
-    public Observable<DrinksModel> getPartyDrinksList() {return iApiHelper.getPartyDrinksList();}
 
     @Override
     public Observable<DrinksModel> getIngredientsList() {
@@ -36,12 +27,14 @@ public class AppDataManager implements IDataManager {
     }
 
     @Override
-    public Observable<DrinksModel> getDrinksByIngredientList(String i) {
-        return iApiHelper.getDrinksByIngredientList(i);
-    }
+    public Observable<DrinksModel> getDrinksByIngredientList(String i) {return iApiHelper.getDrinksByIngredientList(i);}
 
     @Override
-    public Observable<DrinksModel> getDrinkDetailsPage(int i) {
-        return iApiHelper.getDrinkDetailsPage(i);
-    }
+    public Observable<DrinksModel> getDrinkDetailsPage(int i) {return iApiHelper.getDrinkDetailsPage(i);}
+
+    @Override
+    public Observable<DrinksModel> getSearchedDrinkList(String s) {return iApiHelper.getSearchedDrinkList(s);}
+
+    @Override
+    public Observable<DrinksModel> getRandomDrinkDetails() {return iApiHelper.getRandomDrinkDetails();}
 }

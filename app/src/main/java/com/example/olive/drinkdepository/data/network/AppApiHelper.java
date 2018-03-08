@@ -16,33 +16,22 @@ public class AppApiHelper implements IApiHelper{
 
 
     @Override
-    public Observable<DrinksModel> getDrinksList() {
-        return iRequestInterface.getDrinks();
-    }
+    public Observable<DrinksModel> getDrinksList(String c) {return iRequestInterface.getDrinks(c);}
 
     @Override
-    public Observable<DrinksModel> getCocktailDrinksList() {return iRequestInterface.getCocktailDrinks();}
+    public Observable<DrinksModel> getIngredientsList() {return iRequestInterface.getIngredients();}
 
     @Override
-    public Observable<DrinksModel> getHomemadeDrinksList() {return iRequestInterface.getHomemadeDrinks();}
+    public Observable<DrinksModel> getDrinksByIngredientList(String i) {return iRequestInterface.getDrinksByIngredient(i);}
 
     @Override
-    public Observable<DrinksModel> getPartyDrinksList() {return iRequestInterface.getPartyDrinks();}
+    public Observable<DrinksModel> getDrinkDetailsPage(int i) {return iRequestInterface.getDrinkDetails(i);}
 
     @Override
-    public Observable<DrinksModel> getIngredientsList() {
-        return iRequestInterface.getIngredients();
-    }
+    public Observable<DrinksModel> getSearchedDrinkList(String s) {return iRequestInterface.getSearchedDrink(s);}
 
     @Override
-    public Observable<DrinksModel> getDrinksByIngredientList(String i) {
-        return iRequestInterface.getDrinksByIngredient(i);
-    }
-
-    @Override
-    public Observable<DrinksModel> getDrinkDetailsPage(int i) {
-        return iRequestInterface.getDrinkDetails(i);
-    }
+    public Observable<DrinksModel> getRandomDrinkDetails() {return iRequestInterface.getRandomDrink();}
 
 
     public AppApiHelper() { iRequestInterface = ServiceConnection.getConnection();}

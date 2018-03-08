@@ -67,16 +67,18 @@ public class IngredientListFragment extends BaseFragment implements IIngredients
 
     @Override
     public void onFetchDataProgress() {
-
+        showLoading();
     }
 
     @Override
     public void onFetchDataSuccess(DrinksModel drinksModel) {
             recyclerView.setAdapter(new IngredientsListAdapter(getActivity().getApplicationContext(), drinksModel.getDrinks(), R.layout.row_layout));
+        hideLoading();
     }
 
     @Override
     public void onFetchDataError(String error) {
         showMessage(error);
+        hideLoading();
     }
 }

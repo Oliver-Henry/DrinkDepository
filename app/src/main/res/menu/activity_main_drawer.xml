@@ -12,9 +12,12 @@
     <item
         android:id="@+id/nav_search"
         android:icon="@drawable/ic_search_black_24dp"
-        android:title="Search" />
+        android:title="Search Drink" />
     <group android:checkableBehavior="single">
-        <item android:title="Categories" />
+        <item
+            android:id="@+id/nav_categories"
+            android:icon="@android:drawable/arrow_down_float"
+            android:title="Drink Categories" />
         <item
             android:id="@+id/nav_ordinary_drinks"
             android:icon="@drawable/ic_menu_gallery"
@@ -31,6 +34,34 @@
             android:id="@+id/nav_punch_party_drinks"
             android:icon="@android:drawable/btn_star_big_on"
             android:title="Punch / Party Drinks" />
+        <item
+            android:id="@+id/nav_shot"
+            android:icon="@android:drawable/alert_dark_frame"
+            android:title="Shot" />
+        <item
+            android:id="@+id/nav_beer"
+            android:icon="@android:drawable/btn_dialog"
+            android:title="Beer" />
+        <item
+            android:id="@+id/nav_soft_drink_soda"
+            android:icon="@android:drawable/btn_dropdown"
+            android:title="Soft Drink / Soda" />
+        <item
+            android:id="@+id/nav_milk_float_shake"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="Milk / Float / Shake" />
+        <item
+            android:id="@+id/nav_cocoa"
+            android:icon="@android:drawable/editbox_background"
+            android:title="Cocoa" />
+        <item
+            android:id="@+id/nav_coffee_tea"
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="Coffee / Tea" />
+        <item
+            android:id="@+id/nav_other_unknown"
+            android:icon="@android:drawable/ic_lock_idle_alarm"
+            android:title="Other/Unknown" />
     </group>
 
 

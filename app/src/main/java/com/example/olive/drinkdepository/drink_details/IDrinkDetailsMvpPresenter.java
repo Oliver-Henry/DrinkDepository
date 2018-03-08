@@ -9,4 +9,5 @@ import com.example.olive.drinkdepository.ui.base.MvpPresenter;
 
 public interface IDrinkDetailsMvpPresenter<V extends IDrinkDetailsMvpView> extends MvpPresenter<V> {
     void loadDrinkDetails(int i);
+    void loadRandomDrinkDetails();
 }

@@ -14,17 +14,8 @@ import retrofit2.http.Query;
 
 public interface IRequestInterface {
 
-    @GET(ApiList.ORDINARY_DRINKS)
-    Observable<DrinksModel> getDrinks();
-
-    @GET(ApiList.COCKTAILS)
-    Observable<DrinksModel> getCocktailDrinks();
-
-    @GET(ApiList.HOMEMADE_LIQUEURS)
-    Observable<DrinksModel> getHomemadeDrinks();
-
-    @GET(ApiList.PUNCH_PARTY_DRINKS)
-    Observable<DrinksModel> getPartyDrinks();
+    @GET(ApiList.CATEGORY)
+    Observable<DrinksModel> getDrinks(@Query("c") String c);
 
     @GET(ApiList.DRINK_DETAILS)
     Observable<DrinksModel> getDrinkDetails(@Query("i") int i);
@@ -37,6 +28,8 @@ public interface IRequestInterface {
     Observable<DrinksModel> getDrinksByIngredient(@Query("i") String i);
 
     @GET(ApiList.RANDOM_DRINK)
-    Observable<Drink> getRandomDrink();
+    Observable<DrinksModel> getRandomDrink();
 
+    @GET(ApiList.DRINK_SEARCH)
+    Observable<DrinksModel> getSearchedDrink(@Query("s") String s);
 }

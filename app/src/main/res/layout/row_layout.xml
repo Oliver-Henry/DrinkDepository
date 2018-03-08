@@ -8,6 +8,8 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_margin="5dp"
+        android:elevation="10dp"
         app:cardBackgroundColor="@android:color/background_light">
 
         <android.support.constraint.ConstraintLayout
@@ -37,6 +39,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:hint="Drink Name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"

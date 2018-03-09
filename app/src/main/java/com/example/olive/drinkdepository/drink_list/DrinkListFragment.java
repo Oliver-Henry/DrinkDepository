@@ -19,6 +19,9 @@ import com.example.olive.drinkdepository.ui.base.BaseFragment;
 import com.example.olive.drinkdepository.ui.utils.rx.AppSchedulerProvider;
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -30,8 +33,9 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView {
 
-    private RecyclerView recyclerView;
-    //private SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.rVDrinkList)RecyclerView recyclerView;
+    @BindView(R.id.swiperefresh)SwipeRefreshLayout refreshLayout;
+    private Unbinder unbinder;
     private DrinkListPresenterImpl<DrinkListFragment> drinkListFragmentDrinkListPresenter;
 
 
@@ -43,13 +47,18 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView= view.findViewById(R.id.rVDrinkList);
+        unbinder = ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //refreshLayout= view.findViewById(R.id."id");
         setRetainInstance(true);
         callService();
         drinkListFragmentDrinkListPresenter = new DrinkListPresenterImpl<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
         drinkListFragmentDrinkListPresenter.onAttach(this);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callService();
+            }
+        });
     }
 
     @Override
@@ -57,6 +66,15 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_drink_list, container, false);
+    }
+
+    @Override
+    public void onDestroy() {
+        if(unbinder != null){
+            unbinder.unbind();
+        }
+        unbinder = null;
+        super.onDestroy();
     }
 
 
@@ -75,7 +93,7 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
                              else {drinkListFragmentDrinkListPresenter.loadDrinksList(page);}
                         }
                         else{
-                            Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -89,10 +107,13 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
     @Override
     public void onFetchDataSuccess(DrinksModel drinksModel) {
             recyclerView.setAdapter(new DrinkListAdapter(getActivity().getApplicationContext(), drinksModel.getDrinks(), R.layout.row_layout));
+            refreshLayout.setRefreshing(false);
+
         }
 
     @Override
     public void onFetchDataError(String error) {
         showMessage(error);
+        refreshLayout.setRefreshing(false);
     }
 }

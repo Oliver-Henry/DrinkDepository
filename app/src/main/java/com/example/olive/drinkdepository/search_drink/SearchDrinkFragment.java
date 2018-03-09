@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.SearchView;
@@ -35,6 +36,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -47,11 +52,10 @@ import io.reactivex.schedulers.Schedulers;
  * A simple {@link Fragment} subclass.
  */
 public class SearchDrinkFragment extends BaseFragment implements ISearchDrinkMvpView {
-    private RecyclerView recyclerView;
-    private SearchView searchView;
+    @BindView(R.id.rVDrinkSearch)RecyclerView recyclerView;
+    @BindView(R.id.sVDrinkSearch) SearchView searchView;
+    private Unbinder unbinder;
     private SearchDrinkMvpPresenterImpl<SearchDrinkFragment> searchDrinkFragmentSearchDrinkMvpPresenter;
-    private IRequestInterface iRequestInterface;
-    private SearchDrinkAdapter searchDrinkAdapter;
 
     public SearchDrinkFragment() {
         // Required empty public constructor
@@ -68,9 +72,8 @@ public class SearchDrinkFragment extends BaseFragment implements ISearchDrinkMvp
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView= view.findViewById(R.id.rVDrinkSearch);
+        unbinder = ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        searchView= view.findViewById(R.id.sVDrinkSearch);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -88,46 +91,15 @@ public class SearchDrinkFragment extends BaseFragment implements ISearchDrinkMvp
         });
         searchDrinkFragmentSearchDrinkMvpPresenter= new SearchDrinkMvpPresenterImpl<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
         searchDrinkFragmentSearchDrinkMvpPresenter.onAttach(this);
-//        iRequestInterface= ServiceConnection.getConnection();
+    }
 
-
-//        RxSearchView.queryTextChanges(searchView)
-//                .debounce(350, TimeUnit.MILLISECONDS)
-//                //.subscribeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .filter(new Predicate<CharSequence>() {
-//                    @Override
-//                    public boolean test(CharSequence charSequence) throws Exception {
-//                        return !charSequence.toString().isEmpty();
-//                    }
-//                })
-//                .distinctUntilChanged()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(Schedulers.io())
-//                .switchMap(new Function<CharSequence, ObservableSource<DrinksModel>>() {
-//                    @Override
-//                    public ObservableSource<DrinksModel> apply(CharSequence s) throws Exception {
-//                        searchDrinkFragmentSearchDrinkMvpPresenter.loadSearchedDrinks(String.valueOf(s));
-//                        return iRequestInterface.getSearchedDrink(s.toString());
-//
-//                    }
-//                })
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<DrinksModel>() {
-//                               @Override
-//                               public void accept(DrinksModel drinksModel) throws Exception {
-//                                   searchDrinkAdapter.addSearchResponses(drinksModel);
-//                               }
-//                           },
-//                        new Consumer<Throwable>() {
-//                            @Override
-//                            public void accept(Throwable throwable) throws Exception {
-//                                Toast.makeText(getActivity(), throwable.getMessage(), Toast.LENGTH_LONG).show();
-//                            }
-//                        });
-
-
+    @Override
+    public void onDestroy() {
+        if(unbinder != null){
+            unbinder.unbind();
+        }
+        unbinder = null;
+        super.onDestroy();
     }
 
 
@@ -164,56 +136,4 @@ public class SearchDrinkFragment extends BaseFragment implements ISearchDrinkMvp
     }
 
 
-
-//    class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
-//
-//        private final DrinksModel drinksModel = new DrinksModel();
-//
-//        @Override
-//        public SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//            return new SearchViewHolder(getLayoutInflater().inflate(R.layout.row_layout, parent, false));
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(SearchViewHolder holder, int position) {
-//            holder.doBinding(drinksModel);
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return drinksModel.getDrinks().size();
-//        }
-//
-//        void addSearchResponses(DrinksModel drinksModel) {
-//            drinksModel.getDrinks().clear();
-//            drinksModel.getDrinks().addAll(drinksModel.getDrinks());
-//            notifyDataSetChanged();
-//        }
-//
-//        class SearchViewHolder extends RecyclerView.ViewHolder implements OnItemSelectedListener {
-//
-//            final ImageView drinkImg;
-//            final TextView drinkName;
-//            private DrinksModel drinksModel;
-//            private OnItemSelectedListener onItemSelectedListener;
-//
-//            SearchViewHolder(View itemView) {
-//                super(itemView);
-//                this.drinkImg = itemView.findViewById(R.id.imgV);
-//                this.drinkName = itemView.findViewById(R.id.tVDrinkName);
-//            //    itemView.setOnClickListener(this);
-//            }
-//
-//            void doBinding(DrinksModel drinksModel) {
-//                this.drinksModel = drinksModel;
-//                this.drinkName.setText(drinksModel.getDrinks().get(0).getStrDrink());
-//                Picasso.with(this.drinkImg.getContext()).load(drinksModel.getDrinks().get(0).getStrDrinkThumb()).into(this.drinkImg);
-//            }
-//
-//            @Override
-//            public void OnClick(View view, int position) {
-//                MainActivity.showDrinkDetails(Integer.parseInt(drinksModel.getDrinks().get(position).getIdDrink()), position);
-//            }
-//        }
-//    }
 }

@@ -1,14 +1,7 @@
 package com.example.olive.drinkdepository;
 
-import android.content.ClipData;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,25 +10,38 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.SearchView;
 
 import com.example.olive.drinkdepository.drink_details.DrinkDetailsFragment;
 import com.example.olive.drinkdepository.drink_list.DrinkListFragment;
 import com.example.olive.drinkdepository.ingredients_list.IngredientListFragment;
 import com.example.olive.drinkdepository.search_drink.SearchDrinkFragment;
 
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static FragmentManager fragmentManager;
-    private MenuItem categoriesButton, ordinaryDrinksButton, cocktailsButton, homemadeLiqueursButton, punchPartyDrinksButton, shotButton, beerButton;
-    private MenuItem softDrinkSodaButton, milkFloatShakeButton, cocoaButton, coffeeTeaButton, otherUnknownButton;
+    private MenuItem  categoriesButton, ordinaryDrinksButton, cocktailsButton, homemadeLiqueursButton, punchPartyDrinksButton, shotButton, beerButton,
+                      softDrinkSodaButton, milkFloatShakeButton, cocoaButton, coffeeTeaButton, otherUnknownButton;
     private boolean menuOpen;
+//    @BindView(R.id.nav_categories) MenuItem categoriesButton;
+//    @BindViews({ R.id.nav_ordinary_drinks, R.id.nav_cocktails, R.id.nav_homemade_liqueurs, R.id.nav_punch_party_drinks, R.id.nav_shot, R.id.nav_beer,
+//            R.id.nav_soft_drink_soda, R.id.nav_milk_float_shake, R.id.nav_cocoa, R.id.nav_coffee_tea, R.id.nav_other_unknown}) List<MenuItem> menuButtons;
+
+//    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         menuOpen = false;
+//        unbinder = ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu =navigationView.getMenu();
+
         categoriesButton = menu.findItem(R.id.nav_categories);
         ordinaryDrinksButton = menu.findItem(R.id.nav_ordinary_drinks);
         cocktailsButton = menu.findItem(R.id.nav_cocktails);
@@ -67,6 +74,7 @@ public class MainActivity extends AppCompatActivity
         cocoaButton = menu.findItem(R.id.nav_cocoa);
         coffeeTeaButton = menu.findItem(R.id.nav_coffee_tea);
         otherUnknownButton = menu.findItem(R.id.nav_other_unknown);
+//        menuButtons.get(menuButtons.size()).setVisible(false);
         ordinaryDrinksButton.setVisible(false);
         cocktailsButton.setVisible(false);
         homemadeLiqueursButton.setVisible(false);
@@ -78,7 +86,18 @@ public class MainActivity extends AppCompatActivity
         cocoaButton.setVisible(false);
         coffeeTeaButton.setVisible(false);
         otherUnknownButton.setVisible(false);
+
+
     }
+
+//    @Override
+//    protected void onDestroy() {
+//        if(unbinder != null){
+//            unbinder.unbind();
+//        }
+//        unbinder = null;
+//        super.onDestroy();
+//    }
 
     @Override
     public void onBackPressed() {
@@ -252,13 +271,15 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
 
         } else if (id == R.id.nav_map) {
+//            MapFragment mapFragment = new MapFragment();
 //            fragmentManager.beginTransaction()
-//                    .replace(R.id.fragment_container, 'MAP FRAGMENT')
+//                    .replace(R.id.fragment_container, mapFragment)
 //                    .addToBackStack(null)
 //                    .commit();
+//            drawer.closeDrawer(GravityCompat.START);
 
         } else if (id == R.id.nav_categories){
-            if(menuOpen == false){
+            if(!menuOpen){
                 ordinaryDrinksButton.setVisible(true);
                 cocktailsButton.setVisible(true);
                 homemadeLiqueursButton.setVisible(true);
@@ -270,10 +291,11 @@ public class MainActivity extends AppCompatActivity
                 cocoaButton.setVisible(true);
                 coffeeTeaButton.setVisible(true);
                 otherUnknownButton.setVisible(true);
+//                menuButtons.get(menuButtons.size()).setVisible(true);
                 categoriesButton.setIcon(android.R.drawable.arrow_up_float);
                 menuOpen = true;
             }
-            else if (menuOpen == true){
+            else if (menuOpen){
                 ordinaryDrinksButton.setVisible(false);
                 cocktailsButton.setVisible(false);
                 homemadeLiqueursButton.setVisible(false);
@@ -285,6 +307,7 @@ public class MainActivity extends AppCompatActivity
                 cocoaButton.setVisible(false);
                 coffeeTeaButton.setVisible(false);
                 otherUnknownButton.setVisible(false);
+//                menuButtons.get(menuButtons.size()).setVisible(false);
                 categoriesButton.setIcon(android.R.drawable.arrow_down_float);
                 menuOpen = false;
             }

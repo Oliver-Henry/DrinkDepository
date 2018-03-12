@@ -1,8 +1,7 @@
-package com.example.olive.drinkdepository.drink_list;
+package com.example.olive.drinkdepository.home;
 
 import com.example.olive.drinkdepository.data.network.IDataManager;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
-import com.example.olive.drinkdepository.data.network.service.ApiList;
 import com.example.olive.drinkdepository.ui.base.BasePresenter;
 import com.example.olive.drinkdepository.ui.utils.rx.SchedulerProvider;
 
@@ -10,18 +9,18 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by olive on 03/03/2018.
+ * Created by olive on 12/03/2018.
  */
 
-public class DrinkListPresenterImpl<V extends IDrinkListMvpView> extends BasePresenter<V> implements IDrinkListMvpPresenter<V> {
+public class HomeMvpPresenterImpl<V extends IHomeMvpView> extends BasePresenter<V> implements IHomeMvpPresenter<V> {
 
-    public DrinkListPresenterImpl(IDataManager dataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
+    public HomeMvpPresenterImpl(IDataManager dataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(dataManager, schedulerProvider, compositeDisposable);
     }
 
     @Override
-    public void loadDrinksList(String c) {
-        getCompositeDisposable().add(getDataManager().getDrinksList(c)
+    public void loadCategoriesList() {
+        getCompositeDisposable().add(getDataManager().getCategoriesList()
         .subscribeOn(getSchedulerProvider().io())
         .observeOn(getSchedulerProvider().ui())
         .subscribe(new Consumer<DrinksModel>() {
@@ -35,7 +34,6 @@ public class DrinkListPresenterImpl<V extends IDrinkListMvpView> extends BasePre
                     public void accept(Throwable throwable) throws Exception {
                         getMvpView().onFetchDataError(throwable.getMessage());
                     }
-                }
-        ));
+                }));
     }
 }

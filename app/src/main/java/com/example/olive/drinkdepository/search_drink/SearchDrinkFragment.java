@@ -74,6 +74,8 @@ public class SearchDrinkFragment extends BaseFragment implements ISearchDrinkMvp
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        searchView.setQueryHint("E.g. Margarita");
+       // searchView.setQuery("Margarita", false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -84,7 +86,7 @@ public class SearchDrinkFragment extends BaseFragment implements ISearchDrinkMvp
 
             @Override
             public boolean onQueryTextChange(String s) {
-               // Toast.makeText(getActivity(), newText, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
                 if(s != null){callService(s);}
                 return true;
             }

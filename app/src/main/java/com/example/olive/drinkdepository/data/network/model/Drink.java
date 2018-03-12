@@ -447,4 +447,85 @@ public class Drink {
         this.dateModified = dateModified;
     }
 
+    private String allIngredients;
+
+    public String getAllIngredients(){
+
+        if(getStrIngredient1() != null && getStrIngredient1() != "null" && getStrIngredient1() != "" && getStrIngredient1() != " ")
+        {allIngredients = "Ingredients:" + "\n" + getStrIngredient1();}
+        if(getStrIngredient2() != null && getStrIngredient2() != "null" && getStrIngredient2() != "" && getStrIngredient2() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient2();}
+        if(getStrIngredient3() != null && getStrIngredient3() != "null" && getStrIngredient3() != "" && getStrIngredient3() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient3();}
+        if(getStrIngredient4() != null && getStrIngredient4() != "null" && getStrIngredient4() != "" && getStrIngredient4() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient4();}
+        if(getStrIngredient5() != null && getStrIngredient5() != "null" && getStrIngredient5() != "" && getStrIngredient5() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient5();}
+        if(getStrIngredient6() != null && getStrIngredient6() != "null" && getStrIngredient6() != "" && getStrIngredient6() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient6();}
+        if(getStrIngredient7() != null && getStrIngredient7() != "null" && getStrIngredient7() != "" && getStrIngredient7() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient7();}
+        if(getStrIngredient8() != null && getStrIngredient8() != "null" && getStrIngredient8() != "" && getStrIngredient8() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient8();}
+        if(getStrIngredient9() != null && getStrIngredient9() != "null" && getStrIngredient9() != "" && getStrIngredient9() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient9();}
+        if(getStrIngredient10() != null && getStrIngredient10() != "null" && getStrIngredient10() != "" && getStrIngredient10() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient10();}
+        if(getStrIngredient11() != null && getStrIngredient11() != "null" && getStrIngredient11() != "" && getStrIngredient11() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient11();}
+        if(getStrIngredient12() != null && getStrIngredient12() != "null" && getStrIngredient12() != "" && getStrIngredient12() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient12();}
+        if(getStrIngredient13() != null && getStrIngredient13() != "null" && getStrIngredient13() != "" && getStrIngredient13() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient13();}
+        if(getStrIngredient14() != null && getStrIngredient14() != "null" && getStrIngredient14() != "" && getStrIngredient14() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient14();}
+        if(getStrIngredient15() != null && getStrIngredient15() != "null" && getStrIngredient15() != "" && getStrIngredient15() != " ")
+        {allIngredients = allIngredients + "\n" + getStrIngredient15();}
+
+        return allIngredients;
+    }
+
+    public void setAllIngredients(){this.allIngredients = allIngredients;}
+
+
+    private String allMeasurements;
+
+    public String getAllMeasurements(){
+
+        if(getStrMeasure1() != null && getStrMeasure1() != "null" && getStrMeasure1() != "" && getStrMeasure1() != " ")
+        {allMeasurements = "Measurements:" + "\n" + getStrMeasure1();}
+        if(getStrMeasure2() != null && getStrMeasure2() != "null" && getStrMeasure2() != "" && getStrMeasure2() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure2();}
+        if(getStrMeasure3() != null && getStrMeasure3() != "null" && getStrMeasure3() != "" && getStrMeasure3() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure3();}
+        if(getStrMeasure4() != null && getStrMeasure4() != "null" && getStrMeasure4() != "" && getStrMeasure4() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure4();}
+        if(getStrMeasure5() != null && getStrMeasure5() != "null" && getStrMeasure5() != "" && getStrMeasure5() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure5();}
+        if(getStrMeasure6() != null && getStrMeasure6() != "null" && getStrMeasure6() != "" && getStrMeasure6() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure6();}
+        if(getStrMeasure7() != null && getStrMeasure7() != "null" && getStrMeasure7() != "" && getStrMeasure7() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure7();}
+        if(getStrMeasure8() != null && getStrMeasure8() != "null" && getStrMeasure8() != "" && getStrMeasure8() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure8();}
+        if(getStrMeasure9() != null && getStrMeasure9() != "null" && getStrMeasure9() != "" && getStrMeasure9() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure9();}
+        if(getStrMeasure10() != null && getStrMeasure10() != "null" && getStrMeasure10() != "" && getStrMeasure10() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure10();}
+        if(getStrMeasure11() != null && getStrMeasure11() != "null" && getStrMeasure11() != "" && getStrMeasure11() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure11();}
+        if(getStrMeasure12() != null && getStrMeasure12() != "null" && getStrMeasure12() != "" && getStrMeasure12() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure12();}
+        if(getStrMeasure13() != null && getStrMeasure13() != "null" && getStrMeasure13() != "" && getStrMeasure13() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure13();}
+        if(getStrMeasure14() != null && getStrMeasure14() != "null" && getStrMeasure14() != "" && getStrMeasure14() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure14();}
+        if(getStrMeasure15() != null && getStrMeasure15() != "null" && getStrMeasure15() != "" && getStrMeasure15() != " ")
+        {allMeasurements = allMeasurements + "\n" + getStrMeasure15();}
+
+        return allMeasurements;
+    }
+
+    public void setAllMeasurements(){this.allMeasurements = allMeasurements;}
+
 }

@@ -3,44 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.olive.drinkdepository.HomeFragment">
+    tools:context="com.example.olive.drinkdepository.home.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="150dp"
-        android:text="HomePage..." />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="96dp"
-        android:layout_height="97dp"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="250dp"
+        android:id="@+id/imgVAppLogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:src="@android:drawable/btn_star_big_on" />
 
-    <android.support.design.widget.TabLayout
+    <TextView
+        android:id="@+id/tVAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    <TextView
+        android:id="@+id/tVInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="150dp"
+        android:hint="App Information" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rVCategories"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher_background"
-            android:text="Left" />
-
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Center" />
-
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@mipmap/ic_launcher"
-            android:text="Right" />
-    </android.support.design.widget.TabLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"/>
 
 </FrameLayout>

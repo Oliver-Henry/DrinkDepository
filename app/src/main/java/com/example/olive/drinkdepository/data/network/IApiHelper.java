@@ -15,5 +15,6 @@ public interface IApiHelper {
     Observable<DrinksModel> getDrinkDetailsPage(int i);
     Observable<DrinksModel> getSearchedDrinkList(String s);
     Observable<DrinksModel> getRandomDrinkDetails();
+    Observable<DrinksModel> getCategoriesList();
 
 }

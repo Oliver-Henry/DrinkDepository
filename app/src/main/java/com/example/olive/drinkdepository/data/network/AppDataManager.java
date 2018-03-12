@@ -37,4 +37,7 @@ public class AppDataManager implements IDataManager {
 
     @Override
     public Observable<DrinksModel> getRandomDrinkDetails() {return iApiHelper.getRandomDrinkDetails();}
+
+    @Override
+    public Observable<DrinksModel> getCategoriesList() {return iApiHelper.getCategoriesList();}
 }

@@ -13,15 +13,9 @@ import android.view.MenuItem;
 
 import com.example.olive.drinkdepository.drink_details.DrinkDetailsFragment;
 import com.example.olive.drinkdepository.drink_list.DrinkListFragment;
+import com.example.olive.drinkdepository.home.HomeFragment;
 import com.example.olive.drinkdepository.ingredients_list.IngredientListFragment;
 import com.example.olive.drinkdepository.search_drink.SearchDrinkFragment;
-
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.BindViews;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 public class MainActivity extends AppCompatActivity
@@ -137,6 +131,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_search) {
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, new SearchDrinkFragment())
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
             //recyclerView.clear
@@ -148,6 +143,7 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -158,6 +154,7 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -168,6 +165,7 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -178,6 +176,7 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -188,6 +187,7 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -208,6 +209,7 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -218,6 +220,7 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -228,6 +231,7 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -238,6 +242,7 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -248,13 +253,19 @@ public class MainActivity extends AppCompatActivity
             drinkListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, drinkListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
         } else if (id == R.id.nav_search_drk_ingr) {
+            page = "II";
             IngredientListFragment ingredientListFragment = new IngredientListFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("page", page);
+            ingredientListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, ingredientListFragment)
+                    .addToBackStack(null)
                     .commit();
             drawer.closeDrawer(GravityCompat.START);
 
@@ -332,11 +343,23 @@ public class MainActivity extends AppCompatActivity
 
     public static void displayDrinksByIngredient(String name, int position){
         String page = "I";
-        DrinkListFragment drinkListFragment = new DrinkListFragment();
+        IngredientListFragment ingredientListFragment = new IngredientListFragment();
         Bundle bundle = new Bundle();
         bundle.putString("page", page);
         bundle.putString("name", name);
         bundle.putInt("position", position);
+        ingredientListFragment.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ingredientListFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public static void displayDrinksFromCategory(String name, int position){
+        DrinkListFragment drinkListFragment = new DrinkListFragment();
+        String page = name;
+        Bundle bundle = new Bundle();
+        bundle.putString("page", page);
         drinkListFragment.setArguments(bundle);
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, drinkListFragment)

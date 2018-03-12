@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@android:drawable/ic_menu_delete"
+        android:icon="@drawable/homelogo"
         android:title="Home" />
     <item
         android:id="@+id/nav_search"
@@ -19,50 +19,50 @@
         android:title="Drink Categories" />
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_ordinary_drinks"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="Ordinary Drinks" />
+            android:id="@+id/nav_ordinary_drinks"
+            android:icon="@drawable/beerlogo"
+            android:title="Ordinary Drinks" />
 
-            <item
-                android:id="@+id/nav_cocktails"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="Cocktails" />
-            <item
-                android:id="@+id/nav_homemade_liqueurs"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Homemade Liqueurs" />
-            <item
-                android:id="@+id/nav_punch_party_drinks"
-                android:icon="@android:drawable/btn_star_big_on"
-                android:title="Punch / Party Drinks" />
-            <item
-                android:id="@+id/nav_shot"
-                android:icon="@android:drawable/alert_dark_frame"
-                android:title="Shot" />
-            <item
-                android:id="@+id/nav_beer"
-                android:icon="@android:drawable/btn_dialog"
-                android:title="Beer" />
-            <item
-                android:id="@+id/nav_soft_drink_soda"
-                android:icon="@android:drawable/btn_dropdown"
-                android:title="Soft Drink / Soda" />
-            <item
-                android:id="@+id/nav_milk_float_shake"
-                android:icon="@drawable/ic_launcher_foreground"
-                android:title="Milk / Float / Shake" />
-            <item
-                android:id="@+id/nav_cocoa"
-                android:icon="@android:drawable/editbox_background"
-                android:title="Cocoa" />
-            <item
-                android:id="@+id/nav_coffee_tea"
-                android:icon="@android:drawable/ic_dialog_dialer"
-                android:title="Coffee / Tea" />
-            <item
-                android:id="@+id/nav_other_unknown"
-                android:icon="@android:drawable/ic_lock_idle_alarm"
-                android:title="Other/Unknown" />
+        <item
+            android:id="@+id/nav_cocktails"
+            android:icon="@drawable/beerlogo"
+            android:title="Cocktails" />
+        <item
+            android:id="@+id/nav_homemade_liqueurs"
+            android:icon="@drawable/beerlogo"
+            android:title="Homemade Liqueurs" />
+        <item
+            android:id="@+id/nav_punch_party_drinks"
+            android:icon="@drawable/beerlogo"
+            android:title="Punch / Party Drinks" />
+        <item
+            android:id="@+id/nav_shot"
+            android:icon="@drawable/beerlogo"
+            android:title="Shot" />
+        <item
+            android:id="@+id/nav_beer"
+            android:icon="@drawable/beerlogo"
+            android:title="Beer" />
+        <item
+            android:id="@+id/nav_soft_drink_soda"
+            android:icon="@drawable/beerlogo"
+            android:title="Soft Drink / Soda" />
+        <item
+            android:id="@+id/nav_milk_float_shake"
+            android:icon="@drawable/beerlogo"
+            android:title="Milk / Float / Shake" />
+        <item
+            android:id="@+id/nav_cocoa"
+            android:icon="@drawable/beerlogo"
+            android:title="Cocoa" />
+        <item
+            android:id="@+id/nav_coffee_tea"
+            android:icon="@drawable/beerlogo"
+            android:title="Coffee / Tea" />
+        <item
+            android:id="@+id/nav_other_unknown"
+            android:icon="@drawable/beerlogo"
+            android:title="Other/Unknown" />
         <!--</item>-->
     </group>
 

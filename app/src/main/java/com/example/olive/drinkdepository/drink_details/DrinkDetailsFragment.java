@@ -25,8 +25,6 @@ import com.example.olive.drinkdepository.ui.base.BasePresenter;
 import com.example.olive.drinkdepository.ui.utils.NetworkUtils;
 import com.example.olive.drinkdepository.ui.utils.rx.AppSchedulerProvider;
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
-import com.gjiazhe.panoramaimageview.GyroscopeObserver;
-import com.gjiazhe.panoramaimageview.PanoramaImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -117,38 +115,8 @@ public class DrinkDetailsFragment extends BaseFragment implements IDrinkDetailsM
         drinkDetailsTextViews.get(2).setText("Alcoholic/Non-Alcoholic: " + drinksModel.getDrinks().get(0).getStrAlcoholic());
         drinkDetailsTextViews.get(3).setText("Category: " + drinksModel.getDrinks().get(0).getStrCategory());
         drinkDetailsTextViews.get(4).setText("Preparation Instructions: " + drinksModel.getDrinks().get(0).getStrInstructions());
-
-//        String ingredients = "";
-//        if(drinksModel.getDrinks().get(0).getStrIngredient1() != null || drinksModel.getDrinks().get(0).getStrIngredient1() != "null" || drinksModel.getDrinks().get(0).getStrIngredient1() != " ")
-//        {ingredients = drinksModel.getDrinks().get(0).getStrIngredient1();}
-//        if(drinksModel.getDrinks().get(0).getStrIngredient2() != null || drinksModel.getDrinks().get(0).getStrIngredient2() != "null" || drinksModel.getDrinks().get(0).getStrIngredient2() != " ")
-//        {ingredients = ingredients + "\n" + drinksModel.getDrinks().get(0).getStrIngredient2();}
-//        if(drinksModel.getDrinks().get(0).getStrIngredient3() != null || drinksModel.getDrinks().get(0).getStrIngredient3() != "null" || drinksModel.getDrinks().get(0).getStrIngredient3() != " ")
-//        {ingredients = ingredients + "\n" + drinksModel.getDrinks().get(0).getStrIngredient3();}
-//        if(drinksModel.getDrinks().get(0).getStrIngredient4() != null || drinksModel.getDrinks().get(0).getStrIngredient4() != "null" || drinksModel.getDrinks().get(0).getStrIngredient4() != " ")
-//        {ingredients = ingredients + "\n" + drinksModel.getDrinks().get(0).getStrIngredient4();}
-//        if(drinksModel.getDrinks().get(0).getStrIngredient5() != null || drinksModel.getDrinks().get(0).getStrIngredient5() != "null" || drinksModel.getDrinks().get(0).getStrIngredient5() != " ")
-//        {ingredients = ingredients + "\n" + drinksModel.getDrinks().get(0).getStrIngredient5();}
-//
-//        drinkDetailsTextViews.get(5).setText(ingredients);
-                drinkDetailsTextViews.get(5).setText("Ingredients:\n" + drinksModel.getDrinks().get(0).getStrIngredient1() + "\n" + drinksModel.getDrinks().get(0).getStrIngredient2()
-                + "\n" + drinksModel.getDrinks().get(0).getStrIngredient3() + "\n" + drinksModel.getDrinks().get(0).getStrIngredient4()
-                + "\n" + drinksModel.getDrinks().get(0).getStrIngredient5() + "\n" + drinksModel.getDrinks().get(0).getStrIngredient6()
-                + "\n" + drinksModel.getDrinks().get(0).getStrIngredient7() + "\n" + drinksModel.getDrinks().get(0).getStrIngredient8()
-                + "\n" + drinksModel.getDrinks().get(0).getStrIngredient9() + "\n" + drinksModel.getDrinks().get(0).getStrIngredient10()
-                + "\n" + drinksModel.getDrinks().get(0).getStrIngredient11() + "\n" + drinksModel.getDrinks().get(0).getStrIngredient12()
-                + "\n" + drinksModel.getDrinks().get(0).getStrIngredient13() + "\n" + drinksModel.getDrinks().get(0).getStrIngredient14()
-                + "\n" + drinksModel.getDrinks().get(0).getStrIngredient15());
-
-
-        drinkDetailsTextViews.get(6).setText("Measurements:\n" + drinksModel.getDrinks().get(0).getStrMeasure1() + "\n" + drinksModel.getDrinks().get(0).getStrMeasure2()
-                + "\n" + drinksModel.getDrinks().get(0).getStrMeasure3() + "\n" + drinksModel.getDrinks().get(0).getStrMeasure4()
-                + "\n" + drinksModel.getDrinks().get(0).getStrMeasure5() + "\n" + drinksModel.getDrinks().get(0).getStrMeasure6()
-                + "\n" + drinksModel.getDrinks().get(0).getStrMeasure7() + "\n" + drinksModel.getDrinks().get(0).getStrMeasure8()
-                + "\n" + drinksModel.getDrinks().get(0).getStrMeasure9() + "\n" + drinksModel.getDrinks().get(0).getStrMeasure10()
-                + "\n" + drinksModel.getDrinks().get(0).getStrMeasure11() + "\n" + drinksModel.getDrinks().get(0).getStrMeasure12()
-                + "\n" + drinksModel.getDrinks().get(0).getStrMeasure13() + "\n" + drinksModel.getDrinks().get(0).getStrMeasure14()
-                + "\n" + drinksModel.getDrinks().get(0).getStrMeasure15());
+        drinkDetailsTextViews.get(5).setText(drinksModel.getDrinks().get(0).getAllIngredients());
+        drinkDetailsTextViews.get(6).setText(drinksModel.getDrinks().get(0).getAllMeasurements());
 
         String url = drinksModel.getDrinks().get(0).getStrDrinkThumb();
         Picasso.with(getActivity()).load(url).resize(1000, 1000).centerCrop().into(imgDrink);

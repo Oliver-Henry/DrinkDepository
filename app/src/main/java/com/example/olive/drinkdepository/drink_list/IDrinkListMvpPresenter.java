@@ -8,5 +8,4 @@ import com.example.olive.drinkdepository.ui.base.MvpPresenter;
 
 public interface IDrinkListMvpPresenter<V extends IDrinkListMvpView> extends MvpPresenter<V> {
     void loadDrinksList(String c);
-    void loadDrinksByIngredientList(String i);
 }

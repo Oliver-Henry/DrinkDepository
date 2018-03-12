@@ -13,6 +13,7 @@ public class ApiList {
     public static final String SEARCH_BY_INGREDIENT = "filter.php";
     public static final String RANDOM_DRINK = "random.php";
     public static final String DRINK_SEARCH = "search.php";
+    public static final String CATEGORY_LIST = "list.php?c=list";
 }
 
   //search.php?s=margarita //lookup.php?i=13060

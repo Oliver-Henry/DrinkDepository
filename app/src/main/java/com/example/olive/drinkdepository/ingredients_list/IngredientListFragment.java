@@ -10,8 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.olive.drinkdepository.MainActivity;
 import com.example.olive.drinkdepository.R;
 import com.example.olive.drinkdepository.data.network.AppDataManager;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
@@ -34,7 +36,11 @@ public class IngredientListFragment extends BaseFragment implements IIngredients
     private IngredientsListPresenterImpl<IngredientListFragment> ingredientListFragmentIngredientsListPresenter;
     @BindView(R.id.rVIngredientList)RecyclerView recyclerView;
     @BindView(R.id.swiperefreshIngre)SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.rVIngredientDrinkList) RecyclerView recyclerViewD;
+    @BindView(R.id.tVSelectedIngredient) TextView textViewSelectedIngre;
     private Unbinder unbinder;
+    LinearLayoutManager HorizontalLayout ;
+    String page;
 
     public IngredientListFragment() {
         // Required empty public constructor
@@ -51,8 +57,12 @@ public class IngredientListFragment extends BaseFragment implements IIngredients
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+     //   page = "";
         unbinder = ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        HorizontalLayout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(HorizontalLayout);
+        recyclerViewD.setLayoutManager(new LinearLayoutManager(getActivity()));
         ingredientListFragmentIngredientsListPresenter = new IngredientsListPresenterImpl<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
         ingredientListFragmentIngredientsListPresenter.onAttach(this);
         callService();
@@ -80,7 +90,15 @@ public class IngredientListFragment extends BaseFragment implements IIngredients
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean isConnectedToInternet) throws Exception {
-                        if(isConnectedToInternet){ingredientListFragmentIngredientsListPresenter.loadIngredientsList();}
+                        page = getArguments().getString("page");
+                        if(isConnectedToInternet){
+                        ingredientListFragmentIngredientsListPresenter.loadIngredientsList();
+
+                            if(page == "I"){String i = getArguments().getString("name");
+                               // ingredientListFragmentIngredientsListPresenter.loadIngredientsList();
+                                ingredientListFragmentIngredientsListPresenter.loadDrinksByIngredientList(i);
+                            textViewSelectedIngre.setText(i);}}
+
                         else{Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_SHORT).show();}
                     }
                 });
@@ -93,13 +111,34 @@ public class IngredientListFragment extends BaseFragment implements IIngredients
 
     @Override
     public void onFetchDataSuccess(DrinksModel drinksModel) {
-            recyclerView.setAdapter(new IngredientsListAdapter(getActivity().getApplicationContext(), drinksModel.getDrinks(), R.layout.row_layout));
+
+        recyclerView.setAdapter(new IngredientsListAdapter(getActivity().getApplicationContext(), drinksModel.getDrinks(), R.layout.ingredient_row_layout));
         hideLoading();
         refreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onFetchDataError(String error) {
+        showMessage(error);
+        hideLoading();
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onFetchDataProgress2() {
+        showLoading();
+    }
+
+    @Override
+    public void onFetchDataSuccess2(DrinksModel drinksModel) {
+        recyclerViewD.setAdapter(new IngredientDrinkListAdapter(getActivity().getApplicationContext(), drinksModel.getDrinks(), R.layout.row_layout));
+
+        hideLoading();
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onFetchDataError2(String error) {
         showMessage(error);
         hideLoading();
         refreshLayout.setRefreshing(false);

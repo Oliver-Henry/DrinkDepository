@@ -1,16 +1,15 @@
-package com.example.olive.drinkdepository.drink_list;
+package com.example.olive.drinkdepository.home;
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.olive.drinkdepository.R;
@@ -32,42 +31,32 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView {
-
-    @BindView(R.id.rVDrinkList)RecyclerView recyclerView;
-    @BindView(R.id.swiperefresh)SwipeRefreshLayout refreshLayout;
-    @BindView(R.id.tVCat)TextView textViewCate;
+public class HomeFragment extends BaseFragment implements IHomeMvpView {
+    HomeMvpPresenterImpl<HomeFragment> homeFragmentHomeMvpPresenter;
+    @BindView(R.id.rVCategories)RecyclerView recyclerView;
     private Unbinder unbinder;
-    private DrinkListPresenterImpl<DrinkListFragment> drinkListFragmentDrinkListPresenter;
 
-
-    public DrinkListFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        unbinder = ButterKnife.bind(this, view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        setRetainInstance(true);
-        callService();
-        drinkListFragmentDrinkListPresenter = new DrinkListPresenterImpl<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
-        drinkListFragmentDrinkListPresenter.onAttach(this);
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                callService();
-            }
-        });
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_drink_list, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        unbinder = ButterKnife.bind(this, view);
+        int numberOfColumns = 3;
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+        homeFragmentHomeMvpPresenter = new HomeMvpPresenterImpl<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
+        homeFragmentHomeMvpPresenter.onAttach(this);
+        callService();
     }
 
     @Override
@@ -80,7 +69,6 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
     }
 
 
-
     public void callService(){
         ReactiveNetwork.observeInternetConnectivity()
                 .subscribeOn(Schedulers.io())
@@ -88,13 +76,9 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean isConnectedToInternet) throws Exception {
-                        if(isConnectedToInternet){
-                             String page = getArguments().getString("page");
-                             textViewCate.setText(page);
-                             drinkListFragmentDrinkListPresenter.loadDrinksList(page);
-                        }
+                        if(isConnectedToInternet){homeFragmentHomeMvpPresenter.loadCategoriesList();}
                         else{
-                            Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -107,14 +91,11 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
 
     @Override
     public void onFetchDataSuccess(DrinksModel drinksModel) {
-            recyclerView.setAdapter(new DrinkListAdapter(getActivity().getApplicationContext(), drinksModel.getDrinks(), R.layout.row_layout));
-            refreshLayout.setRefreshing(false);
-
-        }
+        recyclerView.setAdapter(new HomeCategoryAdapter(getActivity().getApplicationContext(), drinksModel.getDrinks(), R.layout.category_row_layout));
+    }
 
     @Override
     public void onFetchDataError(String error) {
-        showMessage(error);
-        refreshLayout.setRefreshing(false);
+            showMessage(error);
     }
 }

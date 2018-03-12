@@ -32,4 +32,7 @@ public interface IRequestInterface {
 
     @GET(ApiList.DRINK_SEARCH)
     Observable<DrinksModel> getSearchedDrink(@Query("s") String s);
+
+    @GET(ApiList.CATEGORY_LIST)
+    Observable<DrinksModel> getCategories();
 }

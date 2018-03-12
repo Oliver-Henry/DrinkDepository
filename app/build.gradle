@@ -46,7 +46,7 @@ dependencies {
 
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
 
-    compile 'com.gjiazhe:PanoramaImageView:1.0'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
 
     //Networking
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

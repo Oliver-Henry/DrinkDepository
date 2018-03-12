@@ -38,4 +38,23 @@ public class IngredientsListPresenterImpl<V extends IIngredientsListMvpView> ext
                     }
                 }));
     }
+
+    @Override
+    public void loadDrinksByIngredientList(String i) {
+        getCompositeDisposable().add(getDataManager().getDrinksByIngredientList(i)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(new Consumer<DrinksModel>() {
+                               @Override
+                               public void accept(DrinksModel drinksModel) throws Exception {
+                                   getMvpView().onFetchDataSuccess2(drinksModel);
+                               }
+                           },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                getMvpView().onFetchDataError2(throwable.getMessage());
+                            }
+                        }));
+    }
 }

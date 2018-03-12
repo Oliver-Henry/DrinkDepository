@@ -33,6 +33,9 @@ public class AppApiHelper implements IApiHelper{
     @Override
     public Observable<DrinksModel> getRandomDrinkDetails() {return iRequestInterface.getRandomDrink();}
 
+    @Override
+    public Observable<DrinksModel> getCategoriesList() {return iRequestInterface.getCategories();}
+
 
     public AppApiHelper() { iRequestInterface = ServiceConnection.getConnection();}
 }

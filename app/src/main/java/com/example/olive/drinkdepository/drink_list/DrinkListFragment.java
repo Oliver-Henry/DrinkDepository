@@ -40,7 +40,7 @@ import io.realm.Realm;
 public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView {
 
     @BindView(R.id.rVDrinkList)RecyclerView recyclerView;
-    @BindView(R.id.swiperefresh)SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.swiperefreshDrinkList)SwipeRefreshLayout refreshLayout;
     @BindView(R.id.tVCat)TextView textViewCate;
     private Unbinder unbinder;
     private DrinkListPresenterImpl<DrinkListFragment> drinkListFragmentDrinkListPresenter;
@@ -141,7 +141,7 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
 
     @Override
     public void onFetchDataProgress() {
-
+        showLoading();
     }
 
     @Override
@@ -154,11 +154,13 @@ public class DrinkListFragment extends BaseFragment implements IDrinkListMvpView
 //            realmHelper.saveDrinksR(realmCategoryListModel);
             recyclerView.setAdapter(new DrinkListAdapter(getActivity(), drinksModel.getDrinks(), R.layout.row_layout));
             refreshLayout.setRefreshing(false);
+            hideLoading();
         }
 
     @Override
     public void onFetchDataError(String error) {
         showMessage(error);
 //        refreshLayout.setRefreshing(false);
+        hideLoading();
     }
 }

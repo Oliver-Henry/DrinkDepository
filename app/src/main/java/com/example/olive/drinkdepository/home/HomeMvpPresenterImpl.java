@@ -20,13 +20,16 @@ public class HomeMvpPresenterImpl<V extends IHomeMvpView> extends BasePresenter<
 
     @Override
     public void loadCategoriesList() {
+        getMvpView().onFetchDataProgress();
         getCompositeDisposable().add(getDataManager().getCategoriesList()
         .subscribeOn(getSchedulerProvider().io())
         .observeOn(getSchedulerProvider().ui())
         .subscribe(new Consumer<DrinksModel>() {
                        @Override
                        public void accept(DrinksModel drinksModel) throws Exception {
+
                             getMvpView().onFetchDataSuccess(drinksModel);
+
                        }
                    },
                 new Consumer<Throwable>() {

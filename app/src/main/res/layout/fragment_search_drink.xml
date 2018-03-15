@@ -24,6 +24,7 @@
         android:id="@+id/rVDrinkSearch"
         android:layout_width="match_parent"
         android:scrollbars="vertical"
+        android:paddingBottom="10dp"
         android:layout_height="470dp"
         android:layout_marginTop="50dp" />
 </FrameLayout>

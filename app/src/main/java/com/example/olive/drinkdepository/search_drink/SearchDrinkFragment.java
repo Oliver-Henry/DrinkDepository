@@ -117,19 +117,21 @@ public class SearchDrinkFragment extends BaseFragment implements ISearchDrinkMvp
 
     @Override
     public void onFetchDataProgress() {
-
+        showLoading();
     }
 
     @Override
     public void onFetchDataSuccess(DrinksModel drinksModel) {
            if(drinksModel.getDrinks().size() > 0){recyclerView.setAdapter(new SearchDrinkAdapter(getActivity().getApplicationContext(), drinksModel.getDrinks(), R.layout.row_layout));}
-           else{Toast.makeText(getContext(), "No Results Found", Toast.LENGTH_LONG).show();}
+ //          else{Toast.makeText(getContext(), "No Results Found", Toast.LENGTH_LONG).show();}
+        hideLoading();
 
     }
 
     @Override
     public void onFetchDataError(String error) {
         showMessage(error);
+        hideLoading();
     }
 
 

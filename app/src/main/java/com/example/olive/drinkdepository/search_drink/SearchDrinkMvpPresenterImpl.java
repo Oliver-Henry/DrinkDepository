@@ -20,6 +20,7 @@ public class SearchDrinkMvpPresenterImpl<V extends ISearchDrinkMvpView> extends 
 
     @Override
     public void loadSearchedDrinks(String s) {
+        getMvpView().onFetchDataProgress();
             getCompositeDisposable().add(getDataManager().getSearchedDrinkList(s)
             .subscribeOn(getSchedulerProvider().io())
             .observeOn(getSchedulerProvider().ui())

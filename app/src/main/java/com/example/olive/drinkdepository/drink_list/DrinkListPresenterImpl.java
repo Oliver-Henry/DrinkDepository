@@ -1,13 +1,9 @@
 package com.example.olive.drinkdepository.drink_list;
 
 import com.example.olive.drinkdepository.data.network.IDataManager;
-import com.example.olive.drinkdepository.data.network.model.Drink;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
-import com.example.olive.drinkdepository.data.network.service.ApiList;
 import com.example.olive.drinkdepository.ui.base.BasePresenter;
 import com.example.olive.drinkdepository.ui.utils.rx.SchedulerProvider;
-
-import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -24,6 +20,7 @@ public class DrinkListPresenterImpl<V extends IDrinkListMvpView> extends BasePre
 
     @Override
     public void loadDrinksList(String c) {
+        getMvpView().onFetchDataProgress();
         getCompositeDisposable().add(getDataManager().getDrinksList(c)
         .subscribeOn(getSchedulerProvider().io())
         .observeOn(getSchedulerProvider().ui())

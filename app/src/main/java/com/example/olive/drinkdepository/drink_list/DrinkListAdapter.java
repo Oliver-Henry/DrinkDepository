@@ -53,6 +53,7 @@ class DrinkListAdapter extends RecyclerView.Adapter<DrinkListAdapter.MyViewHolde
 
     @Override
     public void onBindViewHolder(DrinkListAdapter.MyViewHolder holder, int position) {
+        //realmHelper.clearDrinksR();
 
         realmCategoryListModel = new RealmCategoryListModel(
                 drink.get(position).getIdDrink(),

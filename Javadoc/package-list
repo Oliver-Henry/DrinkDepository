@@ -1,0 +1,14 @@
+com.example.olive.drinkdepository
+com.example.olive.drinkdepository.data.local
+com.example.olive.drinkdepository.data.local.controller
+com.example.olive.drinkdepository.data.network
+com.example.olive.drinkdepository.data.network.model
+com.example.olive.drinkdepository.data.network.service
+com.example.olive.drinkdepository.drink_details
+com.example.olive.drinkdepository.drink_list
+com.example.olive.drinkdepository.home
+com.example.olive.drinkdepository.ingredients_list
+com.example.olive.drinkdepository.search_drink
+com.example.olive.drinkdepository.ui.base
+com.example.olive.drinkdepository.ui.utils
+com.example.olive.drinkdepository.ui.utils.rx

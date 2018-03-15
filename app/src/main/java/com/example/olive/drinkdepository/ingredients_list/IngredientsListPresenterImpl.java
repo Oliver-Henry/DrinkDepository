@@ -2,7 +2,6 @@ package com.example.olive.drinkdepository.ingredients_list;
 
 import com.example.olive.drinkdepository.data.network.IDataManager;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
-import com.example.olive.drinkdepository.drink_list.IDrinkListMvpView;
 import com.example.olive.drinkdepository.ui.base.BasePresenter;
 import com.example.olive.drinkdepository.ui.utils.rx.SchedulerProvider;
 
@@ -22,6 +21,7 @@ public class IngredientsListPresenterImpl<V extends IIngredientsListMvpView> ext
 
     @Override
     public void loadIngredientsList() {
+        getMvpView().onFetchDataProgress();
         getCompositeDisposable().add(getDataManager().getIngredientsList()
         .subscribeOn(getSchedulerProvider().io())
         .observeOn(getSchedulerProvider().ui())
@@ -41,6 +41,7 @@ public class IngredientsListPresenterImpl<V extends IIngredientsListMvpView> ext
 
     @Override
     public void loadDrinksByIngredientList(String i) {
+        getMvpView().onFetchDataProgress();
         getCompositeDisposable().add(getDataManager().getDrinksByIngredientList(i)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())

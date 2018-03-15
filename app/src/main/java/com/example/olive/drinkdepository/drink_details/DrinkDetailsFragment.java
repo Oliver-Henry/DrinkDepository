@@ -4,31 +4,20 @@ package com.example.olive.drinkdepository.drink_details;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.olive.drinkdepository.R;
-import com.example.olive.drinkdepository.data.local.controller.RealmHelper;
 import com.example.olive.drinkdepository.data.network.AppDataManager;
-import com.example.olive.drinkdepository.data.network.model.Drink;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
-import com.example.olive.drinkdepository.data.network.service.ApiList;
-import com.example.olive.drinkdepository.data.network.service.IRequestInterface;
-import com.example.olive.drinkdepository.data.network.service.ServiceConnection;
 import com.example.olive.drinkdepository.ui.base.BaseFragment;
-import com.example.olive.drinkdepository.ui.base.BasePresenter;
-import com.example.olive.drinkdepository.ui.utils.NetworkUtils;
 import com.example.olive.drinkdepository.ui.utils.rx.AppSchedulerProvider;
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,7 +28,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import io.realm.Realm;
 
 
 /**
@@ -123,7 +111,12 @@ public class DrinkDetailsFragment extends BaseFragment implements IDrinkDetailsM
 
     @Override
     public void onFetchDataProgress() {
-        showLoading();
+        try {
+            if(getActivity() != null){showLoading();}
+        }
+        catch (Exception e){
+            throw e;
+        }
     }
 
     @Override

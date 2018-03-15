@@ -1,6 +1,7 @@
 package com.example.olive.drinkdepository.drink_details;
 
 import com.example.olive.drinkdepository.data.network.IDataManager;
+import com.example.olive.drinkdepository.data.network.model.Drink;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
 import com.example.olive.drinkdepository.ui.base.BasePresenter;
 import com.example.olive.drinkdepository.ui.utils.rx.SchedulerProvider;

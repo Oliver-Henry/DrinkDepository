@@ -1,8 +1,11 @@
 package com.example.olive.drinkdepository.data.network;
 
+import com.example.olive.drinkdepository.data.network.model.Drink;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
 import com.example.olive.drinkdepository.data.network.service.IRequestInterface;
 import com.example.olive.drinkdepository.data.network.service.ServiceConnection;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -16,7 +19,7 @@ public class AppApiHelper implements IApiHelper{
 
 
     @Override
-    public Observable<DrinksModel> getDrinksList(String c) {return iRequestInterface.getDrinks(c);}
+    public Observable<DrinksModel>getDrinksList(String c) {return iRequestInterface.getDrinks(c);}
 
     @Override
     public Observable<DrinksModel> getIngredientsList() {return iRequestInterface.getIngredients();}

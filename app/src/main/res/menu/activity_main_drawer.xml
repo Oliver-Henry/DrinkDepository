@@ -11,7 +11,7 @@
         android:title="Home" />
     <item
         android:id="@+id/nav_search"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:icon="@drawable/search_drink"
         android:title="Search Drink" />
     <item
         android:id="@+id/nav_categories"
@@ -20,48 +20,48 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_ordinary_drinks"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/ordinary_drink"
             android:title="Ordinary Drinks" />
 
         <item
             android:id="@+id/nav_cocktails"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/cocktail"
             android:title="Cocktails" />
         <item
             android:id="@+id/nav_homemade_liqueurs"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/bottle1"
             android:title="Homemade Liqueurs" />
         <item
             android:id="@+id/nav_punch_party_drinks"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/punch_party_drink"
             android:title="Punch / Party Drinks" />
         <item
             android:id="@+id/nav_shot"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/shot"
             android:title="Shot" />
         <item
             android:id="@+id/nav_beer"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/beer"
             android:title="Beer" />
         <item
             android:id="@+id/nav_soft_drink_soda"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/soft_drink"
             android:title="Soft Drink / Soda" />
         <item
             android:id="@+id/nav_milk_float_shake"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/milkshake"
             android:title="Milk / Float / Shake" />
         <item
             android:id="@+id/nav_cocoa"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/cocoa"
             android:title="Cocoa" />
         <item
             android:id="@+id/nav_coffee_tea"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/coffee_tea"
             android:title="Coffee / Tea" />
         <item
             android:id="@+id/nav_other_unknown"
-            android:icon="@drawable/beerlogo"
+            android:icon="@drawable/bottle2"
             android:title="Other/Unknown" />
         <!--</item>-->
     </group>
@@ -71,11 +71,11 @@
         <menu>
             <item
                 android:id="@+id/nav_search_drk_ingr"
-                android:icon="@android:drawable/ic_search_category_default"
+                android:icon="@drawable/search_ingredients"
                 android:title="Search Drink By Ingredient" />
             <item
                 android:id="@+id/nav_rndm_drink"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/random_drink"
                 android:title="Random Drink" />
             <item
                 android:id="@+id/nav_map"

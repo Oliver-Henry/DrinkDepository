@@ -1,5 +1,6 @@
 package com.example.olive.drinkdepository.drink_details;
 
+import com.example.olive.drinkdepository.data.network.model.Drink;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
 import com.example.olive.drinkdepository.ui.base.MvpView;
 

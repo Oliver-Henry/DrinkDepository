@@ -26,7 +26,7 @@ public class ServiceConnection {
    static Retrofit retrofit;
     private static final int CACHE_SIZE = 10*1024*1024;
     private static final int MAX_STALE = 60*60*1;
-    private static final int MAX_AGE = 1; //default 60
+    private static final int MAX_AGE = 2; //default 60
     private static final String HEADER_NAME = "Cache-Control";
 
    public static IRequestInterface getConnection(){

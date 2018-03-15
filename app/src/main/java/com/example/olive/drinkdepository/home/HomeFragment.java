@@ -4,13 +4,11 @@ package com.example.olive.drinkdepository.home;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.olive.drinkdepository.R;
 import com.example.olive.drinkdepository.data.network.AppDataManager;
@@ -56,7 +54,7 @@ public class HomeFragment extends BaseFragment implements IHomeMvpView {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
         homeFragmentHomeMvpPresenter = new HomeMvpPresenterImpl<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
         homeFragmentHomeMvpPresenter.onAttach(this);
-        callService();
+        homeCallService();
     }
 
     @Override
@@ -69,7 +67,7 @@ public class HomeFragment extends BaseFragment implements IHomeMvpView {
     }
 
 
-    public void callService(){
+    public void homeCallService(){
         ReactiveNetwork.observeInternetConnectivity()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -78,7 +76,7 @@ public class HomeFragment extends BaseFragment implements IHomeMvpView {
                     public void accept(Boolean isConnectedToInternet) throws Exception {
                         if(isConnectedToInternet){homeFragmentHomeMvpPresenter.loadCategoriesList();}
                         else{
-                            Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity().getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

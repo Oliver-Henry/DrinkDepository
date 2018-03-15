@@ -65,11 +65,11 @@ public class IngredientListFragment extends BaseFragment implements IIngredients
         recyclerViewD.setLayoutManager(new LinearLayoutManager(getActivity()));
         ingredientListFragmentIngredientsListPresenter = new IngredientsListPresenterImpl<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
         ingredientListFragmentIngredientsListPresenter.onAttach(this);
-        callService();
+        ingredientListCallService();
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                callService();
+                ingredientListCallService();
             }
         });
     }
@@ -83,7 +83,7 @@ public class IngredientListFragment extends BaseFragment implements IIngredients
         super.onDestroy();
     }
 
-    public void callService(){
+    public void ingredientListCallService(){
         ReactiveNetwork.observeInternetConnectivity()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

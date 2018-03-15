@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.olive.drinkdepository.R;
+import com.example.olive.drinkdepository.data.local.controller.RealmHelper;
 import com.example.olive.drinkdepository.data.network.AppDataManager;
 import com.example.olive.drinkdepository.data.network.model.Drink;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
@@ -27,6 +28,7 @@ import com.example.olive.drinkdepository.ui.utils.rx.AppSchedulerProvider;
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,6 +39,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import io.realm.Realm;
 
 
 /**
@@ -51,10 +54,20 @@ public class DrinkDetailsFragment extends BaseFragment implements IDrinkDetailsM
     List<TextView> drinkDetailsTextViews;
 
     private Unbinder unbinder;
+//    private Realm realm;
+//    private RealmHelper realmHelper;
+//    private ArrayList<Drink> drinkArrayList;
 
     public DrinkDetailsFragment() {
         // Required empty public constructor
     }
+
+//    public void initRealm(){
+//        realm = Realm.getDefaultInstance();
+//        realmHelper = new RealmHelper(realm);
+//        drinkArrayList = new ArrayList<>();
+//        drinkArrayList = realmHelper.getDrinksR();
+//    }
 
 
     @Override
@@ -68,11 +81,12 @@ public class DrinkDetailsFragment extends BaseFragment implements IDrinkDetailsM
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setRetainInstance(true);
+//        initRealm();
         unbinder = ButterKnife.bind(this, view);
         drinkDetailsFragmentDrinkDetailsMvpPresenter = new DrinkDetailsMvpPresenterImpl<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
         drinkDetailsFragmentDrinkDetailsMvpPresenter.onAttach(this);
 
-        callService();
+        drinkDetailsCallService();
 
     }
 
@@ -85,20 +99,24 @@ public class DrinkDetailsFragment extends BaseFragment implements IDrinkDetailsM
         super.onDestroy();
     }
 
-    public void callService(){
+    public void drinkDetailsCallService(){
         ReactiveNetwork.observeInternetConnectivity()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean isConnectedToInternet) throws Exception {
-                        if(isConnectedToInternet){
-                            String page = getArguments().getString("page");
-                            int id = getArguments().getInt("id", -1);
-                            if(page == "D"){drinkDetailsFragmentDrinkDetailsMvpPresenter.loadDrinkDetails(id);}
-                            else if(page == "R"){drinkDetailsFragmentDrinkDetailsMvpPresenter.loadRandomDrinkDetails();}
+                        if (isConnectedToInternet) {
+                            String page = DrinkDetailsFragment.this.getArguments().getString("page");
+                            int id = DrinkDetailsFragment.this.getArguments().getInt("id", -1);
+                            if (page == "D") {
+                                drinkDetailsFragmentDrinkDetailsMvpPresenter.loadDrinkDetails(id);
+                            } else if (page == "R") {
+                                drinkDetailsFragmentDrinkDetailsMvpPresenter.loadRandomDrinkDetails();
+                            }
+                        } else {
+//                            Toast.makeText(DrinkDetailsFragment.this.getActivity().getApplicationContext(), "No Network Connection", Toast.LENGTH_SHORT).show();
                         }
-                        else{Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_SHORT).show();}
                     }
                 });
     }
@@ -110,6 +128,8 @@ public class DrinkDetailsFragment extends BaseFragment implements IDrinkDetailsM
 
     @Override
     public void onFetchDataSuccess(DrinksModel drinksModel) {
+//        drinkDetailsTextViews.get(0).setText(drink.getStrDrink());
+
         drinkDetailsTextViews.get(0).setText(drinksModel.getDrinks().get(0).getStrDrink());
         drinkDetailsTextViews.get(1).setText("Glass Type: " + drinksModel.getDrinks().get(0).getStrGlass());
         drinkDetailsTextViews.get(2).setText("Alcoholic/Non-Alcoholic: " + drinksModel.getDrinks().get(0).getStrAlcoholic());

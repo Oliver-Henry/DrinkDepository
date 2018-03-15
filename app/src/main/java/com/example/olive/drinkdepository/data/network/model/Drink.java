@@ -3,8 +3,19 @@ package com.example.olive.drinkdepository.data.network.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
 
-public class Drink {
+
+public class Drink extends RealmObject {
+
+    public Drink(){}
+
+    public Drink(String idDrink, String strDrink, String strDrinkThumb){
+        this.idDrink = idDrink;
+        this.strDrink = strDrink;
+        this.strDrinkThumb = strDrinkThumb;
+    }
+
 
     @SerializedName("idDrink")
     @Expose
@@ -12,9 +23,9 @@ public class Drink {
     @SerializedName("strDrink")
     @Expose
     private String strDrink;
-    @SerializedName("strVideo")
-    @Expose
-    private Object strVideo;
+//    @SerializedName("strVideo")
+//    @Expose
+//    private Object strVideo;
     @SerializedName("strCategory")
     @Expose
     private String strCategory;
@@ -143,13 +154,13 @@ public class Drink {
         this.strDrink = strDrink;
     }
 
-    public Object getStrVideo() {
-        return strVideo;
-    }
-
-    public void setStrVideo(Object strVideo) {
-        this.strVideo = strVideo;
-    }
+//    public Object getStrVideo() {
+//        return strVideo;
+//    }
+//
+//    public void setStrVideo(Object strVideo) {
+//        this.strVideo = strVideo;
+//    }
 
     public String getStrCategory() {
         return strCategory;

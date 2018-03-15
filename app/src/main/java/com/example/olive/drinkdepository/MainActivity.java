@@ -24,18 +24,12 @@ public class MainActivity extends AppCompatActivity
     private MenuItem  categoriesButton, ordinaryDrinksButton, cocktailsButton, homemadeLiqueursButton, punchPartyDrinksButton, shotButton, beerButton,
                       softDrinkSodaButton, milkFloatShakeButton, cocoaButton, coffeeTeaButton, otherUnknownButton;
     private boolean menuOpen;
-//    @BindView(R.id.nav_categories) MenuItem categoriesButton;
-//    @BindViews({ R.id.nav_ordinary_drinks, R.id.nav_cocktails, R.id.nav_homemade_liqueurs, R.id.nav_punch_party_drinks, R.id.nav_shot, R.id.nav_beer,
-//            R.id.nav_soft_drink_soda, R.id.nav_milk_float_shake, R.id.nav_cocoa, R.id.nav_coffee_tea, R.id.nav_other_unknown}) List<MenuItem> menuButtons;
-
-//    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         menuOpen = false;
-//        unbinder = ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -68,7 +62,6 @@ public class MainActivity extends AppCompatActivity
         cocoaButton = menu.findItem(R.id.nav_cocoa);
         coffeeTeaButton = menu.findItem(R.id.nav_coffee_tea);
         otherUnknownButton = menu.findItem(R.id.nav_other_unknown);
-//        menuButtons.get(menuButtons.size()).setVisible(false);
         ordinaryDrinksButton.setVisible(false);
         cocktailsButton.setVisible(false);
         homemadeLiqueursButton.setVisible(false);
@@ -84,14 +77,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        if(unbinder != null){
-//            unbinder.unbind();
-//        }
-//        unbinder = null;
-//        super.onDestroy();
-//    }
 
     @Override
     public void onBackPressed() {
@@ -110,6 +95,14 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    /**
+     * Reads what menu item inside the navigation menu was and then takes action depending on what
+     * item was clicked e.g. if the 'Random Drink' menu item was clicked then that fragment will
+     * replace the currently open fragment.
+     *
+     * @param item The item within the navigation menu that is clicked
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -117,9 +110,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         String page;
-
         DrinkListFragment drinkListFragment = new DrinkListFragment();
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         if (id == R.id.nav_home) {
@@ -327,6 +318,14 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Gains the id and position of a drink from a recyclerView in the open fragment, which is then
+     * passed on to a new fragment so that the selected drink can be viewed in the new fragment
+     * with additional details
+     *
+     * @param id The id of the selected drink used to pull the correct info from the API
+     * @param position The position in the recycler view confirm which item was selected
+     */
     public static void showDrinkDetails(int id, int position){
         String page = "D";
         DrinkDetailsFragment drinkDetailsFragment = new DrinkDetailsFragment();
@@ -340,6 +339,7 @@ public class MainActivity extends AppCompatActivity
                 .addToBackStack(null)
                 .commit();
     }
+
 
     public static void displayDrinksByIngredient(String name, int position){
         String page = "I";
@@ -355,6 +355,14 @@ public class MainActivity extends AppCompatActivity
                 .commit();
     }
 
+    /**
+     * Retrieves the name of a category from a recyclerView clickListener, which is then, using
+     * bundle passed to a new fragment to be appended on the end of an API call to retrieve data
+     * from the drink category clicked.
+     *
+     * @param name The name of the category/page that will be opened
+     * @param position
+     */
     public static void displayDrinksFromCategory(String name, int position){
         DrinkListFragment drinkListFragment = new DrinkListFragment();
         String page = name;

@@ -4,6 +4,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="home_info">Welcome to the Drink Depository, select a category to view drinks or open the menu for more options</string>
+
 
     <string name="action_settings">Settings</string>
 

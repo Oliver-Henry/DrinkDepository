@@ -1,6 +1,9 @@
 package com.example.olive.drinkdepository.data.network;
 
+import com.example.olive.drinkdepository.data.network.model.Drink;
 import com.example.olive.drinkdepository.data.network.model.DrinksModel;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -17,9 +20,7 @@ public class AppDataManager implements IDataManager {
 
 
     @Override
-    public Observable<DrinksModel> getDrinksList(String c) {
-        return iApiHelper.getDrinksList(c);
-    }
+    public Observable<DrinksModel> getDrinksList(String c) {return iApiHelper.getDrinksList(c);}
 
     @Override
     public Observable<DrinksModel> getIngredientsList() {
